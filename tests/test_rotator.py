@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import sys
 import tempfile
@@ -71,10 +73,11 @@ class RotatorTests(unittest.TestCase):
             self.assertEqual(list(root.glob(".*.tmp")), [])
 
     def test_invalid_numeric_arguments_are_rejected(self):
-        with self.assertRaises(SystemExit):
-            rotator.parse_args(["--poll-interval", "0"])
-        with self.assertRaises(SystemExit):
-            rotator.parse_args(["--delay", "-1"])
+        with contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit):
+                rotator.parse_args(["--poll-interval", "0"])
+            with self.assertRaises(SystemExit):
+                rotator.parse_args(["--delay", "-1"])
 
 
 class PackManagerTests(unittest.TestCase):
