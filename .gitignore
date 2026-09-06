@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated logs and local runtime
+*.log
+.cursor-sounds/
+
+# Optional third-party example downloads
+soundpacks/*/downloads/
